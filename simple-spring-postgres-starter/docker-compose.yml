@@ -1,0 +1,31 @@
+version: "2.2.3"
+
+services:
+  app:
+    build:
+      context: ./app
+      args:
+        - SPRING_GROUP=spring-group
+        - SPRING_USER=spring-user
+    ports:
+      - 8080:8080
+    volumes:
+      - spring-data:/var/log/spring
+  
+  postgres-db:
+    build:
+      context: ./db
+      args:
+        - DB_LANG=ja_JP
+    env_file:
+      - ./db/.env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  spring-data:
+  postgres-data:
+    
+
+
+
