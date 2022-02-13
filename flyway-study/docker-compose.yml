@@ -1,0 +1,26 @@
+version: "2.2.3"
+
+services:
+  flyway:
+    build:
+      context: ./flyway
+    volumes:
+      - flyway-data:/work/flyway
+  postgres-db:
+    build:
+      context: ./db
+      args:
+        - DB_LANG=ja_JP
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgrespass
+      - MIGRATION_USER=migrationuser
+      - MIGRATION_USER_PASSWORD=migrationpass
+    volumes:
+      - flyway-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  flyway-data:
+    external: true
+  flyway-postgres-data:
+    external: true
