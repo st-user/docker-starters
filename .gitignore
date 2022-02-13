@@ -1,1 +1,5 @@
 *.env
+*.env_ecs
+*.memo
+docker-compose-ecs.yml
+ecs-params.yml

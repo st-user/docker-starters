@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  app:
+    image: ${your_spring_image_path}
+    ports:
+      - 8080:8080
+    env_file:
+      - ./app/.env_ecs
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: spring-hello
+        awslogs-region: ap-northeast-1
+        awslogs-stream-prefix: app
+  
+  postgres-db:
+    image: ${your_postgres_image_path}
+    env_file:
+      - ./db/.env
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: spring-hello
+        awslogs-region: ap-northeast-1
+        awslogs-stream-prefix: postgres
+    volumes:
+     - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:  
+
+
+

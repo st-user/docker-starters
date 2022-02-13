@@ -9,6 +9,8 @@ services:
         - SPRING_USER=spring-user
     ports:
       - 8080:8080
+    env_file:
+      - ./app/.env
     volumes:
       - spring-data:/var/log/spring
   
@@ -17,6 +19,8 @@ services:
       context: ./db
       args:
         - DB_LANG=ja_JP
+    depends_on:
+      - app
     env_file:
       - ./db/.env
     volumes:
@@ -24,7 +28,9 @@ services:
 
 volumes:
   spring-data:
+    external: true
   postgres-data:
+    external: true
     
 
 
