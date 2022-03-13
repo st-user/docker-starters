@@ -3,3 +3,4 @@
 *.memo
 docker-compose-ecs.yml
 ecs-params.yml
+.DS_Store
