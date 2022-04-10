@@ -1,27 +1,28 @@
 <template>
-    <h1>Hello</h1>
-    <div class="greeting">{{ message }}</div>
+    <h1>Hello, Vue</h1>
+	<div class="greeting">{{ !message ? $helloWorld('everyone') : message }}</div>
+	<p>name: <input type="text" v-model="name"/></p>
+	<p><button type="button" @click="run">run</button></p>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-type DataType = {
+interface DataType {
+	name: string,
     message: string
 }
 
 const App = defineComponent({
 	data(): DataType {
 		return {
+			name: '',
 			message: '',
 		};
 	},
-	created() {
-		this.initMessage();
-	},
 	methods: {
-		initMessage(): void {
-			this.message = 'World !!';
+		run(): void {
+			this.message = this.$helloWorld(this.name);
 		}
 	}
 });
